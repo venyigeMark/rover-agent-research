@@ -7,7 +7,7 @@ A projekt klónozása után az alábbi lépésekkel állítható elő a reproduk
 
 - [ ] **Unity Hub és Editor:** Telepítsd a Unity Hubot, és győződj meg róla, hogy a `6000.5.2f1` verzió aktív.
 - [ ] **Git:** Git kliens telepítve a verziókövetéshez.
-- [ ] **IDE:** Visual Studio (vagy VS Code) telepítve a C# szkriptekhez.
+- [ ] **IDE:** Visual Studio telepítve a C# szkriptekhez.
 - [ ] **Python környezet:** `Python 3.10+` telepítve. 
 - [ ] **Virtuális környezet aktiválása:** Futtasd a `source .venv/bin/activate` (Linux/Mac) vagy `.venv\Scripts\activate` (Windows) parancsot.
 
