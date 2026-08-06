@@ -15,6 +15,9 @@ public class MovementController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position; // Kezdõpozíció mentése a resethez
+
+        // Kiírjuk a sebességparamétert a Console-ra induláskor
+        Debug.Log($"[Init] Rover kontroller elindult. Beállított sebességparaméter: {speed}");
     }
 
     void Update()
