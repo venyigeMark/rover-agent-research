@@ -1,0 +1,104 @@
+REQUEST: {"request_id": "51d9c866-1681-4737-aa2a-f4cbe3cf07f2", "timestamp": "2026-08-07T11:39:39.324776Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"51d9c866-1681-4737-aa2a-f4cbe3cf07f2","timestamp":"2026-08-07T11:40:12.7620168Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "851b85d3-a738-4159-a94c-47a39d474077", "timestamp": "2026-08-07T11:44:03.478215Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"851b85d3-a738-4159-a94c-47a39d474077","timestamp":"2026-08-07T11:44:33.0232848Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "a81b16ac-63e4-442b-bfa4-35b449edf04b", "timestamp": "2026-08-07T11:50:46.152961Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"a81b16ac-63e4-442b-bfa4-35b449edf04b","timestamp":"2026-08-07T11:51:16.3225125Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "ba7bede8-f629-4623-ab57-486dcbb93ff2", "timestamp": "2026-08-07T11:56:12.971489Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"ba7bede8-f629-4623-ab57-486dcbb93ff2","timestamp":"2026-08-07T11:56:27.6887885Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "216b1af7-50e0-43ed-aff4-fff1a5862733", "timestamp": "2026-08-07T11:56:23.615689Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"216b1af7-50e0-43ed-aff4-fff1a5862733","timestamp":"2026-08-07T11:56:27.7107857Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "f47c0fd6-6f8b-4c55-bddc-ced5175b02df", "timestamp": "2026-08-07T11:56:37.825251Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 2.0} 
+RESPONSE: {"request_id":"unknown","timestamp":"","version":"","status":"error","error_message":"Payload értéke határokon kívül van.","position":{"x":0.0,"y":0.0,"z":0.0}}
+REQUEST: {"request_id": "f60e3272-89db-423d-9788-ad3db681bfe7", "timestamp": "2026-08-07T12:02:30.327744Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"status":"error", "error_message":"Szerver oldali időtúllépés a Unityben!"}
+REQUEST: {"request_id": "032ca525-9d21-4ec6-8b86-238603fb7327", "timestamp": "2026-08-07T12:02:51.739166Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"status":"error", "error_message":"Szerver oldali időtúllépés a Unityben!"}
+REQUEST: {"request_id": "f7999db7-ccdd-4698-a736-ff10359f70a7", "timestamp": "2026-08-07T12:03:04.827765Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"status":"error", "error_message":"Szerver oldali időtúllépés a Unityben!"}
+REQUEST: {"request_id": "66a2f125-8873-486f-8f18-6bff9581d1d7", "timestamp": "2026-08-07T12:04:44.259812Z", "version": "1.0", "action": "move", "payload_x": 1.0, "payload_y": 0.0} 
+RESPONSE: {"status":"error", "error_message":"Szerver oldali időtúllépés a Unityben!"}
+REQUEST: {"request_id": "c98e63ee-ec0b-4ebc-93dc-9692815ab20b", "timestamp": "2026-08-07T12:04:53.847352Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"status":"error", "error_message":"Szerver oldali időtúllépés a Unityben!"}
+REQUEST: {"request_id": "89495809-ae76-47e8-9b25-624ec1537238", "timestamp": "2026-08-07T12:09:05.480112Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"89495809-ae76-47e8-9b25-624ec1537238","timestamp":"2026-08-07T12:09:05.4860115Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "d9bd0b4f-9e65-4a08-bfe8-ed570501ace6", "timestamp": "2026-08-07T12:09:14.488970Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"d9bd0b4f-9e65-4a08-bfe8-ed570501ace6","timestamp":"2026-08-07T12:09:14.5068413Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-3.498450756072998}}
+REQUEST: {"request_id": "32996313-8eb3-483b-9e42-b21997992b1f", "timestamp": "2026-08-07T12:09:30.345130Z", "version": "1.0", "action": "move", "payload_x": 1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"32996313-8eb3-483b-9e42-b21997992b1f","timestamp":"2026-08-07T12:09:30.3576772Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-2.458451747894287}}
+REQUEST: {"request_id": "3bf0f6d0-6400-4799-aedd-cdbbdc32ff28", "timestamp": "2026-08-07T12:09:33.932958Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"3bf0f6d0-6400-4799-aedd-cdbbdc32ff28","timestamp":"2026-08-07T12:09:33.9442323Z","version":"1.0","status":"success","error_message":"","position":{"x":0.16592948138713838,"y":0.5,"z":-2.458451747894287}}
+REQUEST: {"request_id": "ebd8b7f4-7b8c-40c2-99eb-b480b303de15", "timestamp": "2026-08-07T12:09:45.595954Z", "version": "1.0", "action": "stop", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"ebd8b7f4-7b8c-40c2-99eb-b480b303de15","timestamp":"2026-08-07T12:09:45.6071418Z","version":"1.0","status":"success","error_message":"","position":{"x":0.16592948138713838,"y":0.5,"z":-2.458451747894287}}
+REQUEST: {"request_id": "ba921d55-32db-4f29-aa4e-0ee1ab84ac65", "timestamp": "2026-08-07T12:09:49.744051Z", "version": "1.0", "action": "move", "payload_x": 1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"ba921d55-32db-4f29-aa4e-0ee1ab84ac65","timestamp":"2026-08-07T12:09:49.7578001Z","version":"1.0","status":"success","error_message":"","position":{"x":0.16592948138713838,"y":0.5,"z":-2.458451747894287}}
+REQUEST: {"request_id": "380317fc-2f4e-49df-8b95-0e2f45e2154e", "timestamp": "2026-08-07T12:09:54.121408Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"380317fc-2f4e-49df-8b95-0e2f45e2154e","timestamp":"2026-08-07T12:09:54.1278628Z","version":"1.0","status":"success","error_message":"","position":{"x":1.165928602218628,"y":0.5,"z":-2.458451747894287}}
+REQUEST: {"request_id": "1848bb42-ba49-4398-b77d-e280f539af2f", "timestamp": "2026-08-07T12:11:09.734926Z", "version": "1.0", "action": "move", "payload_x": 1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"1848bb42-ba49-4398-b77d-e280f539af2f","timestamp":"2026-08-07T12:11:09.7414963Z","version":"1.0","status":"success","error_message":"","position":{"x":1.165928602218628,"y":0.5,"z":-1.4584527015686036}}
+REQUEST: {"request_id": "b67070f9-0665-41a5-9f35-59a6b6c7a53e", "timestamp": "2026-08-07T12:11:15.123670Z", "version": "1.0", "action": "move", "payload_x": -1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"b67070f9-0665-41a5-9f35-59a6b6c7a53e","timestamp":"2026-08-07T12:11:15.1330712Z","version":"1.0","status":"success","error_message":"","position":{"x":2.1630306243896486,"y":0.5,"z":-1.4584527015686036}}
+REQUEST: {"request_id": "e33830a5-24f6-4136-9a52-670c03b1dca4", "timestamp": "2026-08-07T12:11:18.250858Z", "version": "1.0", "action": "move", "payload_x": -1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"e33830a5-24f6-4136-9a52-670c03b1dca4","timestamp":"2026-08-07T12:11:18.2592930Z","version":"1.0","status":"success","error_message":"","position":{"x":1.160766839981079,"y":0.5,"z":-1.4584527015686036}}
+REQUEST: {"request_id": "82d954ab-51d1-4d97-acc0-68fb329dc7da", "timestamp": "2026-08-07T12:11:19.779860Z", "version": "1.0", "action": "move", "payload_x": -1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"82d954ab-51d1-4d97-acc0-68fb329dc7da","timestamp":"2026-08-07T12:11:19.8043476Z","version":"1.0","status":"success","error_message":"","position":{"x":0.15968509018421174,"y":0.5,"z":-1.4584527015686036}}
+REQUEST: {"request_id": "c243084c-ef73-4966-87c7-dca8196aa76c", "timestamp": "2026-08-07T12:11:25.042307Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"c243084c-ef73-4966-87c7-dca8196aa76c","timestamp":"2026-08-07T12:11:25.0567433Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8438372015953064,"y":0.5,"z":-1.4584527015686036}}
+REQUEST: {"request_id": "0074a4cb-3894-4b86-b577-da41475e37fa", "timestamp": "2026-08-07T12:11:29.380154Z", "version": "1.0", "action": "move", "payload_x": 1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"0074a4cb-3894-4b86-b577-da41475e37fa","timestamp":"2026-08-07T12:11:29.3943287Z","version":"1.0","status":"success","error_message":"","position":{"x":0.1415059119462967,"y":0.5,"z":-5.082399845123291}}
+REQUEST: {"request_id": "1be27714-1ad5-467a-b699-d681306d39c7", "timestamp": "2026-08-07T12:11:32.780623Z", "version": "1.0", "action": "stop", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"1be27714-1ad5-467a-b699-d681306d39c7","timestamp":"2026-08-07T12:11:32.8058046Z","version":"1.0","status":"success","error_message":"","position":{"x":1.9548883438110352,"y":0.5,"z":-8.735151290893555}}
+REQUEST: {"hibas_json: rossz szerver teszt 
+RESPONSE: {"request_id":"unknown","timestamp":"","version":"","status":"error","error_message":"JSON parse error: Missing a closing quotation mark in string.","position":{"x":0.0,"y":0.0,"z":0.0}}
+REQUEST: {"request_id": "74a79699-a53e-4543-9506-1ece569cd521", "timestamp": "2026-08-07T12:13:53.255299Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"74a79699-a53e-4543-9506-1ece569cd521","timestamp":"2026-08-07T12:13:53.2701394Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "03b3cc76-8a3e-460a-a107-cb479db03b5a", "timestamp": "2026-08-07T12:14:04.085287Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"03b3cc76-8a3e-460a-a107-cb479db03b5a","timestamp":"2026-08-07T12:14:04.1001147Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "fde96618-69ab-4927-acee-57d3f8088632", "timestamp": "2026-08-07T12:14:06.279684Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"fde96618-69ab-4927-acee-57d3f8088632","timestamp":"2026-08-07T12:14:06.3061349Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-3.5384507179260256}}
+REQUEST: {"request_id": "ba8d74aa-312a-4ae9-91f1-6d79da367106", "timestamp": "2026-08-07T12:14:08.932939Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"ba8d74aa-312a-4ae9-91f1-6d79da367106","timestamp":"2026-08-07T12:14:08.9482568Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-2.4984517097473146}}
+REQUEST: {"request_id": "aaa3268d-a2e1-4f64-868c-28f1c08323d9", "timestamp": "2026-08-07T12:14:10.259317Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"aaa3268d-a2e1-4f64-868c-28f1c08323d9","timestamp":"2026-08-07T12:14:10.2602812Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-1.4584527015686036}}
+REQUEST: {"request_id": "3e75e2ae-523a-48ec-906e-876ca8994f27", "timestamp": "2026-08-07T12:14:14.836688Z", "version": "1.0", "action": "stop", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"3e75e2ae-523a-48ec-906e-876ca8994f27","timestamp":"2026-08-07T12:14:14.8410214Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-5.4293036460876469}}
+REQUEST: {"request_id": "c04316a4-be0b-4549-a5d5-e6c5ea5008b8", "timestamp": "2026-08-07T12:14:18.447427Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"c04316a4-be0b-4549-a5d5-e6c5ea5008b8","timestamp":"2026-08-07T12:14:18.4561310Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-5.4293036460876469}}
+REQUEST: {"request_id": "a5fb955a-0402-4547-b525-689138bf33f7", "timestamp": "2026-08-07T12:14:22.672623Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 2.0} 
+RESPONSE: {"request_id":"unknown","timestamp":"","version":"","status":"error","error_message":"Payload értéke határokon kívül van.","position":{"x":0.0,"y":0.0,"z":0.0}}
+REQUEST: {"request_id": "8d342a98-8bf1-4814-b2a5-305f172161c6", "timestamp": "2026-08-07T12:14:27.017363Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"8d342a98-8bf1-4814-b2a5-305f172161c6","timestamp":"2026-08-07T12:14:27.0370030Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.429304599761963}}
+REQUEST: {"request_id": "d237f02a-e3c7-4e6d-a21a-52dbc3b41635", "timestamp": "2026-08-07T12:19:05.404098Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"d237f02a-e3c7-4e6d-a21a-52dbc3b41635","timestamp":"2026-08-07T12:19:05.4167875Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "e54d4135-585d-4a2b-bc24-8df09ee1594e", "timestamp": "2026-08-07T12:19:08.913432Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"e54d4135-585d-4a2b-bc24-8df09ee1594e","timestamp":"2026-08-07T12:19:08.9248114Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-3.5384507179260256}}
+REQUEST: {"request_id": "59561961-7e5e-4c27-87b3-a181e9ea3c3d", "timestamp": "2026-08-07T12:19:16.130869Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"59561961-7e5e-4c27-87b3-a181e9ea3c3d","timestamp":"2026-08-07T12:19:16.1467181Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-2.5426433086395265}}
+REQUEST: {"request_id": "5250e090-435d-4fba-98f8-eb65b95c582f", "timestamp": "2026-08-07T12:19:17.860131Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"5250e090-435d-4fba-98f8-eb65b95c582f","timestamp":"2026-08-07T12:19:17.8751662Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-1.5438810586929322}}
+REQUEST: {"request_id": "0009dd9b-ddac-4852-9e76-62ff14c5decf", "timestamp": "2026-08-07T12:19:20.325527Z", "version": "1.0", "action": "stop", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"0009dd9b-ddac-4852-9e76-62ff14c5decf","timestamp":"2026-08-07T12:19:20.3355786Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-2.821152925491333}}
+REQUEST: {"request_id": "6c3c9e0b-91cd-4bdd-b1e0-03d815ee222b", "timestamp": "2026-08-07T12:19:27.736631Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"6c3c9e0b-91cd-4bdd-b1e0-03d815ee222b","timestamp":"2026-08-07T12:19:27.7464562Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-2.821152925491333}}
+REQUEST: {"hibas_json: rossz szerver teszt 
+RESPONSE: {"request_id":"unknown","timestamp":"","version":"","status":"error","error_message":"JSON parse error: Missing a closing quotation mark in string.","position":{"x":0.0,"y":0.0,"z":0.0}}
+REQUEST: {"request_id": "cefd5751-e256-4755-8578-59f3bc9fa417", "timestamp": "2026-08-07T12:40:18.183528Z", "version": "1.0", "action": "observe", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"cefd5751-e256-4755-8578-59f3bc9fa417","timestamp":"2026-08-07T12:40:18.1975538Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "e0000597-7c5a-4502-a390-cdb88b2b12f9", "timestamp": "2026-08-07T12:40:31.557276Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"e0000597-7c5a-4502-a390-cdb88b2b12f9","timestamp":"2026-08-07T12:40:31.5732413Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-4.538449764251709}}
+REQUEST: {"request_id": "51c52413-0d8b-4f45-be9b-66ce35270605", "timestamp": "2026-08-07T12:40:37.693791Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"51c52413-0d8b-4f45-be9b-66ce35270605","timestamp":"2026-08-07T12:40:37.7005277Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-3.5384507179260256}}
+REQUEST: {"request_id": "2d691513-f97a-4f45-ba6a-0f51ee7de420", "timestamp": "2026-08-07T12:40:38.996891Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"2d691513-f97a-4f45-ba6a-0f51ee7de420","timestamp":"2026-08-07T12:40:39.0014640Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-2.538468360900879}}
+REQUEST: {"request_id": "99c150c3-5bcb-457b-b20a-a3424b42acac", "timestamp": "2026-08-07T12:40:40.213609Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 1.0} 
+RESPONSE: {"request_id":"99c150c3-5bcb-457b-b20a-a3424b42acac","timestamp":"2026-08-07T12:40:40.2252237Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-1.5388685464859009}}
+REQUEST: {"request_id": "029ad06d-5de6-4552-9f16-a154a1aa1b1b", "timestamp": "2026-08-07T12:40:43.795467Z", "version": "1.0", "action": "stop", "payload_x": 0.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"029ad06d-5de6-4552-9f16-a154a1aa1b1b","timestamp":"2026-08-07T12:40:43.8121904Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-3.982706308364868}}
+REQUEST: {"request_id": "00ccfe69-e4a8-4c4d-afcf-30e84ac89d0e", "timestamp": "2026-08-07T12:40:49.370566Z", "version": "1.0", "action": "move", "payload_x": 1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"00ccfe69-e4a8-4c4d-afcf-30e84ac89d0e","timestamp":"2026-08-07T12:40:49.3812639Z","version":"1.0","status":"success","error_message":"","position":{"x":-0.8340700268745422,"y":0.5,"z":-3.982706308364868}}
+REQUEST: {"request_id": "e9a1d679-8c02-401b-a5ae-07f52d4cb95f", "timestamp": "2026-08-07T12:40:52.515493Z", "version": "1.0", "action": "move", "payload_x": -1.0, "payload_y": 0.0} 
+RESPONSE: {"request_id":"e9a1d679-8c02-401b-a5ae-07f52d4cb95f","timestamp":"2026-08-07T12:40:52.5316519Z","version":"1.0","status":"success","error_message":"","position":{"x":0.16592948138713838,"y":0.5,"z":-3.982706308364868}}
+REQUEST: {"request_id": "8016e331-edaa-4b5a-b8d2-5840e0f16c73", "timestamp": "2026-08-07T12:41:03.563008Z", "version": "1.0", "action": "move", "payload_x": 0.0, "payload_y": 2.0} 
+RESPONSE: {"request_id":"unknown","timestamp":"","version":"","status":"error","error_message":"Payload értéke határokon kívül van.","position":{"x":0.0,"y":0.0,"z":0.0}}
+REQUEST: {"hibas_json: rossz szerver teszt 
+RESPONSE: {"request_id":"unknown","timestamp":"","version":"","status":"error","error_message":"JSON parse error: Missing a closing quotation mark in string.","position":{"x":0.0,"y":0.0,"z":0.0}}

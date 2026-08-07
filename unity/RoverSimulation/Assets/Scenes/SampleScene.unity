@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 156949163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.61908, y: 0.1412, z: 3}
+  m_LocalPosition: {x: -0.61908, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -671,6 +671,7 @@ GameObject:
   - component: {fileID: 1296146500}
   - component: {fileID: 1296146499}
   - component: {fileID: 1296146498}
+  - component: {fileID: 1296146504}
   m_Layer: 0
   m_Name: RoverSphere
   m_TagString: Untagged
@@ -690,7 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbc3ada05b77114f894df399f9548a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementController
-  speed: 5
+  speed: 2
 --- !u!54 &1296146499
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -811,6 +812,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1296146504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296146497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1799c8f0d98508245868f1aacb3f9571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NewAssembly::TcpServerController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
