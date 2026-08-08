@@ -16,3 +16,27 @@
 | Eredmény | Elfogadott javaslat. A szálbiztos (Producer-Consumer) architektúra és a JSON kommunikáció sikeresen felépült. |
 | Emberi ellenőrzés | Python terminálból manuális tesztelés (`move`, `observe`, `stop`). Fókuszvesztésből és UTF-8 BOM-ból eredő szinkronhibák AI-val közös debuggolása. |
 | Tanulság | A Unity háttérszálas (JsonUtility) limitációinak és az `Application.runInBackground` fontosságának megismerése. Sikeres hibakezelés (timeout, badjson) implementálása. |
+
+Mozgásmodellek összehasonlítása
+
+A feladat kéri, hogy hasonlítsunk össze legalább két rovermozgás-modellt, és indokoljuk meg, miért a kinematikussal indulunk.
+
+1. Kinematikus modell (Kinematic Model)
+
+Működési elv: A mozgást tisztán matematikai és geometriai egyenletek írják le az idő függvényében, anélkül, hogy figyelembe vennék az erőket, a tömeget vagy a súrlódást. A pozíciót közvetlenül a sebesség ($v$) és a szögsebesség  határozza meg.
+
+Előnyök: 100%-osan determinisztikus. Ha ugyanazt a parancsot adod ki tízszer, a rover tízszer hajszálpontosan ugyanoda fog érkezni. Számításigénye minimális, az irányítás tökéletesen precíz.
+
+Hátrányok: Nem reagál valósághűen a környezetre. Nincs tehetetlensége (azonnal megáll), és a kerekek nem tudnak "kipörögni" a sárban.
+
+2. Dinamikus / Fizikai modell (Dynamic / Physics-based Model)
+
+Működési elv: A mozgás erő- és nyomatékvektorok alkalmazásával történik (pl. motor forgatónyomatéka a tengelyen). Figyelembe veszi a rover tömegét, a gravitációt, a kerekek és a talaj közötti súrlódási együtthatót (Unity WheelCollider).
+
+Előnyök: Rendkívül valósághű. A rover sodródik a kanyarban, lelassul az emelkedőn, és megcsúszik a jégen.
+
+Hátrányok: Nem determinisztikus. A fizikai motor apró lebegőpontos kerekítési hibái miatt ugyanaz a parancs eltérő végeredményt adhat. Nagyon nehéz paraméterezni (súrlódási görbék, felfüggesztés rugózása).
+
+Miért a kinematikus változattal indulunk? 
+
+A kutatás jelenlegi fázisában az AI ágensek tanítása a cél. A gépi tanulás korai szakaszaiban kritikus fontosságú a determinizmus. Az ügynöknek először meg kell tanulnia a tiszta ok-okozati összefüggéseket (pl. ha kiadom az "előre" parancsot, a pozícióm "Y" értékkel nő). Ha egy dinamikus modellt használnánk, a fizikai motor apró csúszásai és "zajai" összezavarnák az AI-t, megnehezítve a konvergenciát. A kinematikus modell stabil, zajmentes alapot biztosít az első megfigyelés-akció (observe-move) ciklusok teszteléséhez, és biztosítja, hogy a prefab bármilyen új jelenetbe átemelve (acceptance criteria) pontosan ugyanúgy viselkedjen.

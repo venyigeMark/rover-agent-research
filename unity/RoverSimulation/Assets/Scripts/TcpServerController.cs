@@ -130,6 +130,10 @@ public class TcpServerController : MonoBehaviour
                 {
                     if (movementController != null) movementController.StopMovement();
                 }
+                else if (cmd.action == "reset")
+                {
+                    if (movementController != null) movementController.ResetPosition();
+                }
 
                 jsonOutput = JsonUtility.ToJson(response);
             }

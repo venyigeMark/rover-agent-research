@@ -1,75 +1,85 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class MovementController : MonoBehaviour
 {
-    public float speed = 5.0f;
-    private Rigidbody rb;
-    private Vector3 startPosition;
-    private Vector2 currentInput;
+    [Header("Kinematic Settings")]
+    public float moveSpeed = 2.0f; // m/s
+    public float turnSpeed = 90.0f; // fok/s
 
-    // Biztonsági timeout változók (M03)
+    [Header("Wheels for Animation")]
+    public Transform[] wheels; // Húzd ide a 4 kereket az Inspectorban!
+
+    private float currentLinearInput = 0f;
+    private float currentAngularInput = 0f;
+    private float wheelRadius = 0.5f; // A kerekek sugara a sebességszámításhoz
+
     private float lastCommandTime;
     private const float COMMAND_TIMEOUT = 0.5f;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        startPosition = transform.position; // Kezdõpozíció mentése a resethez (M02)
-        Debug.Log($"[Init] Rover kontroller elindult. Sebesség: {speed}");
+        Debug.Log("[Rover] Kinematikus modell inicializálva.");
     }
 
     void Update()
     {
-        // Ha letelt a timeout új parancs nélkül, megállítjuk a rovert (M03)
+        // Timeout védelem
         if (Time.time - lastCommandTime > COMMAND_TIMEOUT)
         {
-            currentInput = Vector2.zero;
+            currentLinearInput = 0f;
+            currentAngularInput = 0f;
         }
 
-        // Manuális reset gomb ('R') meghagyása teszteléshez (M02)
-        if (Input.GetKeyDown(KeyCode.R))
+        // 1. Relatív szögû fordulás (Y tengely körül)
+        if (currentAngularInput != 0f)
         {
-            ResetPosition();
+            float turnAmount = currentAngularInput * turnSpeed * Time.deltaTime;
+            transform.Rotate(0, turnAmount, 0);
+        }
+
+        // 2. Elõre/Hátra haladás (Lokális Z tengely mentén)
+        if (currentLinearInput != 0f)
+        {
+            float moveDistance = currentLinearInput * moveSpeed * Time.deltaTime;
+            transform.Translate(0, 0, moveDistance, Space.Self);
+
+            // 3. Kerékanimáció (Követi a mozgást)
+            // A megtett út = szögelfordulás (radián) * sugár
+            // Szög (fok) = (Út / Kerület) * 360
+            float wheelCircumference = 2 * Mathf.PI * wheelRadius;
+            float rotationDegrees = (moveDistance / wheelCircumference) * 360f;
+
+            foreach (Transform wheel in wheels)
+            {
+                if (wheel != null)
+                {
+                    // Helyi X tengely körüli forgatás a henger orientációja miatt
+                    wheel.Rotate(Vector3.up, rotationDegrees, Space.Self);
+                }
+            }
         }
     }
 
-    void FixedUpdate()
+    // A TCP szerver hívja ezt a függvényt.
+    // x = fordulás (jobbra/balra), y = gáz (elõre/hátra)
+    public void ExecuteMove(float angularInput, float linearInput)
     {
-        Vector3 movement = new Vector3(currentInput.x, 0.0f, currentInput.y).normalized;
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-    }
-
-    // Ezt a függvényt fogja hívni a hálózati TCP szerver (M03)
-    public void ExecuteMove(float x, float y)
-    {
-        currentInput = new Vector2(x, y);
-        lastCommandTime = Time.time; // Idõzítõ frissítése
+        currentAngularInput = angularInput;
+        currentLinearInput = linearInput;
+        lastCommandTime = Time.time;
     }
 
     public void StopMovement()
     {
-        currentInput = Vector2.zero;
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        currentLinearInput = 0f;
+        currentAngularInput = 0f;
     }
 
-    // Publikus Reset funkció a tesztekhez és manuális visszaállításhoz (M02)
     public void ResetPosition()
     {
-        transform.position = startPosition;
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        currentInput = Vector2.zero; // A bemenetet is nullázzuk a biztonság kedvéért
-        Debug.Log("Reset: Pozíció visszaállítva a kiindulópontra!");
-    }
-
-    // Egyszerû ütközésjelzés a Console-ra (M02)
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name != "Floor")
-        {
-            Debug.Log($"Ütközés történt ezzel: {collision.gameObject.name}");
-        }
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        currentLinearInput = 0f;
+        currentAngularInput = 0f;
     }
 }

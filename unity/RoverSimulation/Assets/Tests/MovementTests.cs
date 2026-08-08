@@ -19,7 +19,7 @@ public class MovementTests
         rb.useGravity = false;
 
         controller = testRover.AddComponent<MovementController>();
-        controller.speed = 5f;
+        controller.moveSpeed = 5f;
     }
 
     [TearDown]
