@@ -1,0 +1,15 @@
+{
+    "scenario_name": "train_scenario",
+    "time_scale": 10.0,
+    "background_color": "#1a1a1a",
+    "track": {
+        "line_width": 0.5,
+        "curvature_frequency": 2.0,
+        "curvature_amplitude": 5.0
+    },
+    "obstacles": {
+        "seed": 42,
+        "spawn_rate": 3.0,
+        "max_concurrent": 5
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "scenario_name": "test_scenario",
+    "time_scale": 2.0,
+    "background_color": "#000000",
+    "track": {
+        "line_width": 0.3,
+        "curvature_frequency": 3.5,
+        "curvature_amplitude": 7.0
+    },
+    "obstacles": {
+        "seed": 34210,
+        "spawn_rate": 1.5,
+        "max_concurrent": 8
+    }
+}
