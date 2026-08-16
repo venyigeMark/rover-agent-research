@@ -28,7 +28,7 @@ def send_command(action, payload_value=0.0):
 
 def main():
     print("=== Rover CLI Kliens (v1.0 - M05) ===")
-    print("Parancsok: observe, move <méter>, turn <fok>, stop, reset, exit")
+    print("Parancsok: observe, get_status, move <méter>, turn <fok>, stop, reset, exit")
     
     while True:
         try:
@@ -39,7 +39,7 @@ def main():
             
             if action == 'exit':
                 break
-            elif action in ['observe', 'stop', 'reset']:
+            elif action in ['observe', 'get_status', 'stop', 'reset']:
                 send_command(action)
             elif action in ['move', 'turn']:
                 if len(cmd_input) > 1:
