@@ -83,3 +83,12 @@ stateDiagram-v2
 *   `ERR_OUT_OF_BOUNDS`: A payload túllépte a biztonsági korlátokat.
 *   `ERR_INVALID_FORMAT`: Hibás JSON vagy hiányzó mezők.
 *   `ERR_TIMEOUT`: A parancs végrehajtása túl sokáig tartott.
+
+### `get_status`
+Lekérdezi a rover jelenlegi állapotát és hálózati "életjelként" (Watchdog ping) is szolgál. Működésében megegyezik az `observe` paranccsal, de kifejezetten az állapotgép és a rendszerstátusz ellenőrzésére fókuszál.
+
+* **Kérés (Request):**
+  * `action`: `"get_status"`
+  * `payload_value`: `0.0` (figyelmen kívül hagyva)
+* **Pre-condition (Előfeltétel):** Nincs. Bármilyen állapotban (`IDLE`, `MOVING`, `TURNING`, `ERROR`) biztonságosan meghívható, anélkül, hogy megakasztaná a folyamatban lévő mozgást.
+* **Post-condition (Utófeltétel):** A rover állapota és pozíciója változatlan marad. A szerver visszaadja az aktuális `rover_state` (pl. `MOVING`, `IDLE`) és `position` adatokat, a Watchdog időzítő pedig nullázódik.
