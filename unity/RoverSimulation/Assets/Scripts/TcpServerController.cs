@@ -1,166 +1,144 @@
-using System;
-using System.Collections.Concurrent;
-using System.IO;
+using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 using System.Text;
-using System.Threading;
-using UnityEngine;
+using System.Collections.Generic;
 
 public class TcpServerController : MonoBehaviour
 {
+    [System.Serializable]
+    public class RoverRequest { public string request_id; public string version; public string action; public float payload_value; }
+
+    [System.Serializable]
+    public class RoverResponse { public string request_id; public string status; public string error_code; public string rover_state; public Vector3 position; }
+
+    public int port = 5556;
     private TcpListener listener;
-    private Thread serverThread;
     private bool isRunning = false;
     private MovementController movementController;
-    private string logFilePath;
-
-    private ConcurrentQueue<string> incomingStrings = new ConcurrentQueue<string>();
-    private ConcurrentQueue<string> outgoingStrings = new ConcurrentQueue<string>();
+    private List<string> processedRequests = new List<string>();
 
     void Start()
     {
-        Application.runInBackground = true;
-
         movementController = GetComponent<MovementController>();
-        logFilePath = Path.Combine(Application.dataPath, "../gateway_log.jsonl");
-        StartServer();
-    }
-
-    private void StartServer()
-    {
-        serverThread = new Thread(ServerLoop);
-        serverThread.IsBackground = true;
-        isRunning = true;
-        serverThread.Start();
-        Debug.Log("[TCP] Szerver elindult a 5555-ös porton.");
-    }
-
-    private void ServerLoop()
-    {
-        listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 5555);
-        listener.Start();
-
-        while (isRunning)
+        if (movementController == null)
         {
-            try
-            {
-                if (!listener.Pending())
-                {
-                    Thread.Sleep(10);
-                    continue;
-                }
-
-                using (TcpClient client = listener.AcceptTcpClient())
-                using (NetworkStream stream = client.GetStream())
-                using (StreamReader reader = new StreamReader(stream, new UTF8Encoding(false)))
-                using (StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false)) { AutoFlush = true })
-                {
-                    // 1. BIZTOSÍTÉK: Ürítjük a beragadt válaszokat, hogy tiszta lappal induljunk!
-                    while (outgoingStrings.TryDequeue(out _)) { }
-
-                    string jsonInput = reader.ReadLine();
-                    if (string.IsNullOrEmpty(jsonInput)) continue;
-
-                    incomingStrings.Enqueue(jsonInput);
-
-                    string jsonOutput = null;
-                    int waitTime = 0;
-
-                    // 2. BIZTOSÍTÉK: Sose várjunk a végtelenségig a fõszálra! (Max 2 másodperc)
-                    while (waitTime < 2000)
-                    {
-                        if (!isRunning) return;
-                        if (outgoingStrings.TryDequeue(out jsonOutput)) break;
-                        Thread.Sleep(10);
-                        waitTime += 10;
-                    }
-
-                    if (string.IsNullOrEmpty(jsonOutput))
-                    {
-                        jsonOutput = "{\"status\":\"error\", \"error_message\":\"Szerver oldali idõtúllépés a Unityben!\"}";
-                    }
-
-                    writer.WriteLine(jsonOutput);
-                    writer.Flush(); // 3. BIZTOSÍTÉK: Garantáltan kitoljuk az adatot a hálózatra!
-
-                    // 4. BIZTOSÍTÉK: Szépen zárjuk le a TCP kapcsolatot
-                    client.Client.Shutdown(SocketShutdown.Both);
-
-                    File.AppendAllText(logFilePath, $"REQUEST: {jsonInput} \nRESPONSE: {jsonOutput}\n");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning($"[TCP] Kapcsolati hiba a háttérszálon: {ex.Message}");
-            }
+            Debug.LogError("[TCP KRITIKUS HIBA] Nincs MovementController a Roveren! A szerver nem fog mûködni.");
         }
+
+        Application.runInBackground = true;
+        listener = new TcpListener(IPAddress.Any, port);
+        listener.Start();
+        isRunning = true;
+        Debug.Log($"[TCP] Szuperbiztos Szerver elindult a {port}-es porton.");
     }
 
     void Update()
     {
-        if (incomingStrings.TryDequeue(out string jsonInput))
+        if (!isRunning || listener == null || !listener.Pending()) return;
+
+        TcpClient client = listener.AcceptTcpClient();
+        client.ReceiveTimeout = 2000;
+        client.SendTimeout = 2000;
+
+        try
         {
-            string jsonOutput = "";
-            try
+            using (NetworkStream stream = client.GetStream())
+            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+            // Fontos javítás: UTF8Encoding(false) eltávolítja a BOM-ot, ami összezavarhatja a Pythont!
+            using (StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false)) { AutoFlush = true })
             {
-                CommandMessage cmd = JsonUtility.FromJson<CommandMessage>(jsonInput);
-                if (cmd == null) throw new Exception("Hibás JSON parancs.");
+                Debug.Log("[TCP] Kliens csatlakozott. Várakozás adatra...");
+                string json = reader.ReadLine();
+                Debug.Log($"[TCP] Kapott adat: '{json}'");
 
-                // Tartomány validálása
-                if (cmd.action == "move" && (cmd.payload_x < -1 || cmd.payload_x > 1 || cmd.payload_y < -1 || cmd.payload_y > 1))
+                if (string.IsNullOrEmpty(json))
                 {
-                    throw new Exception("Payload értéke határokon kívül van.");
+                    Debug.LogWarning("[TCP] Üres adatot kaptunk, kapcsolat zárása.");
+                    return;
                 }
 
-                ResponseMessage response = new ResponseMessage
-                {
-                    request_id = cmd.request_id,
-                    timestamp = DateTime.UtcNow.ToString("o"),
-                    version = cmd.version,
-                    status = "success",
-                    position = transform.position
-                };
+                RoverRequest req = null;
+                try { req = JsonUtility.FromJson<RoverRequest>(json); }
+                catch (System.Exception ex) { Debug.LogWarning("[TCP] JSON parse hiba: " + ex.Message); }
 
-                if (cmd.action == "move")
+                string responseJson = "";
+
+                if (req == null || string.IsNullOrEmpty(req.request_id) || string.IsNullOrEmpty(req.action))
                 {
-                    if (movementController != null) movementController.ExecuteMove(cmd.payload_x, cmd.payload_y);
+                    responseJson = CreateErrorJson(req != null ? req.request_id : "unknown", "ERR_INVALID_FORMAT");
                 }
-                else if (cmd.action == "stop")
+                else
                 {
-                    if (movementController != null) movementController.StopMovement();
-                }
-                else if (cmd.action == "reset")
-                {
-                    if (movementController != null) movementController.ResetPosition();
+                    responseJson = ProcessCommand(req);
                 }
 
-                jsonOutput = JsonUtility.ToJson(response);
+                Debug.Log($"[TCP] Küldött válasz: '{responseJson}'");
+                writer.WriteLine(responseJson);
             }
-            catch (Exception ex)
-            {
-                ResponseMessage errResponse = new ResponseMessage
-                {
-                    request_id = "unknown",
-                    status = "error",
-                    error_message = ex.Message
-                };
-                jsonOutput = JsonUtility.ToJson(errResponse);
-            }
-
-            if (string.IsNullOrEmpty(jsonOutput))
-            {
-                jsonOutput = "{\"status\":\"error\", \"error_message\":\"Kritikus belsõ hiba\"}";
-            }
-
-            outgoingStrings.Enqueue(jsonOutput);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("[TCP] Fatális hiba a kapcsolat alatt: " + e.Message);
+        }
+        finally
+        {
+            client.Close();
+            Debug.Log("[TCP] Kapcsolat lezárva.");
         }
     }
 
-    void OnApplicationQuit()
+    string ProcessCommand(RoverRequest req)
     {
-        isRunning = false;
-        listener?.Stop();
-        serverThread?.Abort();
+        if (movementController == null) return CreateErrorJson(req.request_id, "ERR_SYSTEM_FAIL");
+
+        RoverResponse res = new RoverResponse
+        {
+            request_id = req.request_id,
+            rover_state = movementController.currentState.ToString(),
+            position = transform.position
+        };
+
+        if (processedRequests.Contains(req.request_id))
+        {
+            res.status = "success"; res.error_code = "";
+            return JsonUtility.ToJson(res);
+        }
+
+        processedRequests.Add(req.request_id);
+        if (processedRequests.Count > 100) processedRequests.RemoveAt(0);
+
+        res.status = "success"; res.error_code = "";
+
+        switch (req.action.ToLower())
+        {
+            case "move":
+                if (movementController.currentState != MovementController.RoverState.IDLE) { res.status = "busy"; res.error_code = "ERR_BUSY"; }
+                else if (Mathf.Abs(req.payload_value) > movementController.maxDistance) { res.status = "error"; res.error_code = "ERR_OUT_OF_BOUNDS"; }
+                else { movementController.ExecuteMove(req.payload_value); }
+                break;
+            case "turn":
+                if (movementController.currentState != MovementController.RoverState.IDLE) { res.status = "busy"; res.error_code = "ERR_BUSY"; }
+                else if (Mathf.Abs(req.payload_value) > movementController.maxAngle) { res.status = "error"; res.error_code = "ERR_OUT_OF_BOUNDS"; }
+                else { movementController.ExecuteTurn(req.payload_value); }
+                break;
+            case "stop": movementController.StopMovement(); break;
+            case "observe": case "get_status": movementController.PingWatchdog(); break;
+            case "reset": movementController.ResetPosition(); break;
+            default: res.status = "error"; res.error_code = "ERR_INVALID_FORMAT"; break;
+        }
+
+        res.rover_state = movementController.currentState.ToString();
+        res.position = transform.position;
+        return JsonUtility.ToJson(res);
     }
+
+    string CreateErrorJson(string reqId, string errorCode)
+    {
+        string safeReqId = string.IsNullOrEmpty(reqId) ? "unknown" : reqId;
+        return $"{{\"request_id\":\"{safeReqId}\",\"status\":\"error\",\"error_code\":\"{errorCode}\",\"rover_state\":\"ERROR\",\"position\":{{\"x\":0,\"y\":0,\"z\":0}}}}";
+    }
+
+    void OnApplicationQuit() { isRunning = false; if (listener != null) listener.Stop(); }
 }

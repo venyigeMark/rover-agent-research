@@ -40,3 +40,30 @@ Hátrányok: Nem determinisztikus. A fizikai motor apró lebegőpontos kerekít�
 Miért a kinematikus változattal indulunk? 
 
 A kutatás jelenlegi fázisában az AI ágensek tanítása a cél. A gépi tanulás korai szakaszaiban kritikus fontosságú a determinizmus. Az ügynöknek először meg kell tanulnia a tiszta ok-okozati összefüggéseket (pl. ha kiadom az "előre" parancsot, a pozícióm "Y" értékkel nő). Ha egy dinamikus modellt használnánk, a fizikai motor apró csúszásai és "zajai" összezavarnák az AI-t, megnehezítve a konvergenciát. A kinematikus modell stabil, zajmentes alapot biztosít az első megfigyelés-akció (observe-move) ciklusok teszteléséhez, és biztosítja, hogy a prefab bármilyen új jelenetbe átemelve (acceptance criteria) pontosan ugyanúgy viselkedjen.
+
+
+AI Protokoll-Review (Támadói és Debugger Szemszög):
+
+    Sebezhetőség 1: Végtelen mozgás és kapcsolatvesztés (Orphaned Rover).
+
+        Támadás/Hiba: A kliens kiad egy move(10000) parancsot, majd a hálózat megszakad. A rover vakon kimegy a világból.
+
+        Védekezés: Hard-kódolt biztonsági korlátok (Max távolság: 5 méter / parancs). Hardveres/Szoftveres Watchdog timer bevezetése: ha 2 másodpercig megszakad a TCP kapcsolat, a rover kényszer-megállást (E-STOP) hajt végre.
+
+    Sebezhetőség 2: Replay Attack (Visszajátszás) és Duplikációk.
+
+        Támadás/Hiba: A TCP csomag késik, a kliens újra elküldi a move(2) parancsot. A rover összesen 4 métert megy.
+
+        Védekezés: Idempotencia request_id alapján. A szerver memóriában tartja az utolsó 100 request_id-t. Ha ugyanaz az ID érkezik, nem hajtja végre újra a mozgást, csak visszaküldi az előző választ.
+
+    Sebezhetőség 3: Állapot-inkonzisztencia (Race conditions).
+
+        Támadás/Hiba: A kliens kiad egy turn(90) parancsot, miközben a rover még javában hajtja végre a move(5) parancsot.
+
+        Védekezés: Szigorú Állapotgép (State Machine) bevezetése. Ha a rover állapota nem IDLE, minden új mozgási parancsot el kell dobni egy HTTP 409 Conflict-hoz hasonló ERR_BUSY hibakóddal. Csak a stop() és az observe() futhat le mozgás közben.
+
+    Sebezhetőség 4: Típus- és Határhibák (Fuzzing vektorok).
+
+        Támadás/Hiba: A payload NaN, Infinity, null, vagy extrém szám (pl. 1e99).
+
+        Védekezés: Szigorú JSON Schema validáció a szerver oldalon, deszerializáció előtti szanálás.
