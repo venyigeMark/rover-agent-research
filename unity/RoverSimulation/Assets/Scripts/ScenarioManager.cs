@@ -24,6 +24,15 @@ public class ScenarioManager : MonoBehaviour
 
     void Start()
     {
+        string[] args = System.Environment.GetCommandLineArgs();
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i] == "--scenario" && i + 1 < args.Length)
+            {
+                scenarioFileName = args[i + 1];
+            }
+        }
+
         lineRenderer = GetComponent<LineRenderer>();
         if (lineRenderer == null) lineRenderer = gameObject.AddComponent<LineRenderer>();
 
