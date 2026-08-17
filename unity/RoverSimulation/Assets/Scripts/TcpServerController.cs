@@ -11,7 +11,7 @@ public class TcpServerController : MonoBehaviour
     public class RoverRequest { public string request_id; public string version; public string action; public float payload_value; }
 
     [System.Serializable]
-    public class RoverResponse { public string request_id; public string status; public string error_code; public string rover_state; public Vector3 position; public BottomColorSensor.SensorState sensor; }
+    public class RoverResponse { public string request_id; public string status; public string error_code; public string rover_state; public Vector3 position; public BottomColorSensor.SensorState sensor; public LidarSensor.LidarData lidar; }
 
     public int port = 5556;
     private TcpListener listener;
@@ -19,6 +19,7 @@ public class TcpServerController : MonoBehaviour
     private MovementController movementController;
     private List<string> processedRequests = new List<string>();
     public BottomColorSensor colorSensor;
+    public LidarSensor lidarSensor;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class TcpServerController : MonoBehaviour
         listener.Start();
         isRunning = true;
         if (colorSensor == null) colorSensor = FindAnyObjectByType<BottomColorSensor>();
+        if (lidarSensor == null) lidarSensor = FindAnyObjectByType<LidarSensor>();
         Debug.Log($"[TCP] Szuperbiztos Szerver elindult a {port}-es porton.");
     }
 
@@ -106,6 +108,11 @@ public class TcpServerController : MonoBehaviour
         if (colorSensor != null)
         {
             res.sensor = colorSensor.GetCurrentSensorState();
+        }
+
+        if (lidarSensor != null)
+        {
+            res.lidar = lidarSensor.GetLidarData();
         }
 
         if (processedRequests.Contains(req.request_id))
