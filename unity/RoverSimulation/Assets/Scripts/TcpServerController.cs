@@ -11,13 +11,14 @@ public class TcpServerController : MonoBehaviour
     public class RoverRequest { public string request_id; public string version; public string action; public float payload_value; }
 
     [System.Serializable]
-    public class RoverResponse { public string request_id; public string status; public string error_code; public string rover_state; public Vector3 position; }
+    public class RoverResponse { public string request_id; public string status; public string error_code; public string rover_state; public Vector3 position; public BottomColorSensor.SensorState sensor; }
 
     public int port = 5556;
     private TcpListener listener;
     private bool isRunning = false;
     private MovementController movementController;
     private List<string> processedRequests = new List<string>();
+    public BottomColorSensor colorSensor;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class TcpServerController : MonoBehaviour
         listener = new TcpListener(IPAddress.Any, port);
         listener.Start();
         isRunning = true;
+        if (colorSensor == null) colorSensor = FindAnyObjectByType<BottomColorSensor>();
         Debug.Log($"[TCP] Szuperbiztos Szerver elindult a {port}-es porton.");
     }
 
@@ -99,6 +101,12 @@ public class TcpServerController : MonoBehaviour
             rover_state = movementController.currentState.ToString(),
             position = transform.position
         };
+
+        // ÚJ SOR: Lekérjük a szenzor aktuális adatát, és betesszük a válaszba
+        if (colorSensor != null)
+        {
+            res.sensor = colorSensor.GetCurrentSensorState();
+        }
 
         if (processedRequests.Contains(req.request_id))
         {

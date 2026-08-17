@@ -104,6 +104,8 @@ public class ScenarioManager : MonoBehaviour
             float z = Mathf.Sin(angle) * radius;
             lineRenderer.SetPosition(i, new Vector3(x, 0.05f, z));
         }
+
+       
     }
 
     IEnumerator SpawnObstaclesRoutine()
